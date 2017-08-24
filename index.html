@@ -93,6 +93,11 @@
                             print "Total: $total"
                         </code>
                         </pre>
+                        <aside class="notes">
+                            <ul>
+                                <li>Client: "We need it to list all purchased items, their prices and the grand total"</li>
+                            </ul>
+                        </aside>
                     </section>
                     <section>
                         <pre>
@@ -106,6 +111,11 @@
                         </code>
                         </pre>
                     </section>
+                    <aside class="notes">
+                        <ul>
+                            <li>Client: "Oh, we also need it to show the shipping costs and include those in the grand total"</li>
+                        </ul>
+                    </aside>
                     <section>
                         <pre>
                         <code data-trim class="php">
@@ -122,6 +132,11 @@
                             print "Total:    $total;
                         </code>
                         </pre>
+                        <aside class="notes">
+                            <ul>
+                                <li>Client: "Penny from marketing wants to give a 10% discount to new customers"</li>
+                            </ul>
+                        </aside>
                     </section>
                     <section>
                         <pre>
@@ -137,6 +152,11 @@
                             ...
                         </code>
                         </pre>
+                        <aside class="notes">
+                            <ul>
+                                <li>Client: "Penny also wants to run various promotions"</li>
+                            </ul>
+                        </aside>
                     </section>
                     <section>
                         <pre class="">
@@ -185,24 +205,74 @@
                         </code>
                         </pre>
                         <aside class="notes">
-                            Far easier to read and change.
-                            
-                            If the shipping costs end up being dynamic, we can easily introduce a calculateShipping method.
-                            
-                            Changing the order in which things are printed is a matter of reordering the print... lines.
+                            <ul>
+                                <li>Far easier to read and change.</li>
+                                <li>If the shipping costs end up being dynamic, we can easily introduce a calculateShipping method.</li>
+                                <li>Changing the order in which things are printed is a matter of reordering the print... lines.</li>
+                            </ul>
                         </aside>
                     </section>
                 </section>
                 <section>
                     <h1>Keeping code clean</h1>
                     <section>
+                        <h2>What do we consider clean code?</h2>
+                        <ul class="fragment">
+                            <li>Adheres to coding standards</li>
+                            <li>Short methods/functions (.i.e. <=25 lines)</li>
+                            <li>Method names describe their intent</li>
+                            <li>No magic numbers or strings</li>
+                            <li>Few nested loops/conditionals</li>
+                            <li>Comments only describe WHY code does something, not how it does it.</li>
+                        </ul>
+                        <aside class="notes">
+                            Clean code is <b>EASY TO READ</b>:<br>
+                            <ul>
+                                <li>Reads like well written prose</li>
+                                <li>Requires no scrolling</li>
+                                <li>Conveys intent</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Why should I want clean code?</h2>
+                        <aside class="notes">
+                            Ask how much time we spend reading code, compared to writing code.
+                            <ul>
+                                <li>25%?</li>
+                                <li>50%?</li>
+                                <li>75%?</li>
+                                <li>more?</li>
+                            </ul>
+                            Substantial time, readable code is important.
+                        </aside>
+                    </section>
+                    <section>
                         <h2>The boyscout rule</h2>
                         <blockquote>
-                        "Try and leave this world a little better than you found it."
-                        <caption>
-                            Robert Stephenson Smyth Baden-Powell - <em>the father of scouting</em>
-                        </caption>
+                            "Try and leave this world a little better than you found it."
+                            <caption>
+                                Robert Stephenson Smyth Baden-Powell - <em>the father of scouting</em>
+                            </caption>
                         </blockquote>
+                        <aside class="notes">
+                            <ul>
+                                <li>Any effort, no matter how small, improves your code</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Code review</h2>
+                        <ul>
+                            <li>Helps prevent bad code from entering your code base.</li>
+                            <li>Points out which code is hard to read</li>
+                            <li>Improves your skill as a developer</li>
+                        </ul>
+                        <aside class="notes">
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </aside>
                     </section>
                 </section>
                 <section>
@@ -253,6 +323,7 @@
                 width: 1920,
                 height: 1080,
                 margin: 0.05,
+                controls: false,
 			});
 		</script>
 	</body>
