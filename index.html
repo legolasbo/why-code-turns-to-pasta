@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+                    <h1>Why your project turns to pasta</h1>
+                    <h2>and what to do about it</h2>
+                </section>
+				<section>
+                    <H1>About me</H1>
+                    <ul>
+                        <li>31 years old</li>
+                        <li>Father of two</li>
+                        <li>Programming since 8 years old</li>
+                        <li>Developer at Deeson</li>
+                        <li>5+ years experience with Drupal 6, 7 and 8</li>
+                    </ul>
+                </section>
+                <section>
+                    <h1>Warming up</h1>
+                    <aside class="notes">
+                        <ul>
+                            <li>Could everyone who identifies themselves a developer stand up? <em>Frontend, backend, doesn't matter</em></li>
+                            <li>Could everyone who identifies as male sit down.</li>
+                            <li>What's wrong with this picture?</li>
+                            <li>What are we as a technical community doing to scare all these bright, talented, woman away?</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h1>Good code</h1>
+                    <section>
+                        <ul class="fragment">
+                            <li>Adheres to coding standards</li>
+                            <li>Extensible</li>
+                            <li>Reusable</li>
+                            <li>Decoupled</li>
+                            <li>Cohesive</li>
+                            <li>Structured</li>
+                            <li>Readable</li>
+                        </ul>
+                        <aside class="notes">
+                            Ask definition of good code.
+                        </aside>
+                    </section>
+                    <section>
+                        Is maintainable.
+                        
+                        <aside class="notes">
+                            We know this to be true, but why do we fail to write it?
+                        </aside>
+                    </section>
+                </section>
+                <section>
+                    <h1>How code turns to pasta.</h1>
+                    <section>
+                        <aside class="notes">
+                            <ul>
+                                <li>Simple shopping cart checkout</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <pre>
+                        <code data-trim class="php">
+                            $total = 0;
+                            foreach ($items as $item) {
+                                print "$item->name: $item->price"
+                                $total = $total + $item->price
+                            }
+                            print "Total: $total"
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <pre>
+                        <code data-trim class="php">
+                            ...
+                            print "Subtotal: $total";
+                            
+                            print "Shipping: $shippingCosts";
+                            $total = $total + $shippingCosts;
+                            print "Total:    $total;
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <pre>
+                        <code data-trim class="php">
+                            ...
+                            print "Subtotal: $total";
+                            
+                            if ($account->isNewCustomer() == TRUE) {
+                                $discount = $total * 0.10;
+                                print "10% new customer discount: -$discount";
+                                $total = $total - $discount;
+                            }
+                            
+                            ...
+                            print "Total:    $total;
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <pre>
+                        <code data-trim class="php">
+                            ...
+                            
+                            if (...) {
+                                ...
+                            }
+                            else {
+                                ...
+                            }
+                            ...
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <pre class="">
+                        <code data-trim class="php auto-height">
+                            $total = 0;
+                            foreach ($items as $item) {
+                                print "$item->name: $item->price"
+                                $total = $total + $item->price
+                            }
+                            print "Subtotal: $total";
+                            
+                            if ($account->isNewCustomer() == TRUE) {
+                                $discount = $total * 0.10;
+                                print "10% new customer discount: -$discount";
+                                $total = $total - $discount;
+                            }
+                            if (...) {
+                                ...
+                            }
+                            else {
+                                ...
+                            }
+                            
+                            print "Shipping: $shippingCosts";
+                            $total = $total + $shippingCosts;
+                            print "Total:    $total;
+                        </code>
+                        </pre>
+                        <aside class="notes">
+                            Whenever change is needed, you must read and understand it all.
+                            Keeping with this approach will only make the code rot more.
+                        </aside>
+                    </section>
+                    <section>
+                        <pre>
+                        <code data-trim class="php">
+                            /** @var DiscountCollection **/
+                            $discounts = getDiscountsFor($items, $account);
+                            $total = $subtotal - $discounts->totalDiscount + $shippingCosts;
+                            
+                            printItems($items);
+                            printSubtotal(calculateSubtotal($items));
+                            printDiscounts($discounts);
+                            printShipping($shippingCosts);
+                            printTotal($total);
+                        </code>
+                        </pre>
+                        <aside class="notes">
+                            Far easier to read and change.
+                            
+                            If the shipping costs end up being dynamic, we can easily introduce a calculateShipping method.
+                            
+                            Changing the order in which things are printed is a matter of reordering the print... lines.
+                        </aside>
+                    </section>
+                </section>
+                <section>
+                    <h1>Keeping code clean</h1>
+                    <section>
+                        <h2>The boyscout rule</h2>
+                        <blockquote>
+                        "Try and leave this world a little better than you found it."
+                        <caption>
+                            Robert Stephenson Smyth Baden-Powell - <em>the father of scouting</em>
+                        </caption>
+                        </blockquote>
+                    </section>
+                </section>
+                <section>
+                    <h1>Estimation</h1>
+                    <ul>
+                        <li>It's just that, an estimate</li>
+                        <li>Managers/clients see it as a promise</li>
+                        <li>Expectaction management</li>
+                        <li>Ideally consists of 3 numbers, min, best guess, max</li>
+                        <li>...</li>
+                    </ul>
+                </section>
+                <section>
+                    <h1>Coding practices</h1>
+                    <ul>
+                        <li>Clean code</li>
+                        <li>Code review</li>
+                        <li>...</li>
+                    </ul>
+                </section>
+                <section>
+                    <h1>Saying no</h1>
+                    <aside class="notes">
+                        <ul>
+                            <li>Who starts project with the best intentions? <em>We'll do it right this time. We'll go fast!</em></li>
+                            <li>Who has been slowed down by bad code?</li>
+                            <li>Who has been slowed down by their own bad code?</li>
+                        </ul>
+                    </aside>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				],
+                width: 1920,
+                height: 1080,
+                margin: 0.05,
+			});
+		</script>
+	</body>
+</html>
