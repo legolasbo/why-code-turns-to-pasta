@@ -236,28 +236,69 @@
                     </section>
                     <section>
                         <h2>Why should I want clean code?</h2>
+                        <div class="fragment">
+                            <blockquote>
+                                “Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. ...[Therefore,] making it easy to read makes it easier to write.”
+                                <caption>Robert C. Martin, Clean Code: A Handbook of Agile Software Craftsmanship</caption>
+                            </blockquote>
+                        </div>
+                        <div class="fragment"><!-- todo! -->THIS SHOULD HAVE A GRAPH</div>
                         <aside class="notes">
                             Ask how much time we spend reading code, compared to writing code.
                             <ul>
-                                <li>25%?</li>
-                                <li>50%?</li>
-                                <li>75%?</li>
+                                <li>25:75?</li>
+                                <li>50:50?</li>
+                                <li>75:25?</li>
                                 <li>more?</li>
                             </ul>
                             Substantial time, readable code is important.
                         </aside>
                     </section>
                     <section>
-                        <h2>The boyscout rule</h2>
-                        <blockquote>
-                            "Try and leave this world a little better than you found it."
-                            <caption>
-                                Robert Stephenson Smyth Baden-Powell - <em>the father of scouting</em>
-                            </caption>
-                        </blockquote>
+                        <h2>Use meaningful names</h2>
+                        <pre class="fragment">
+                        <code data-trim class="php">
+                            $fn = "John" // First name
+                            $ln = "Doe" // Last name
+                        </code>
+                        </pre>
+                        <pre class="fragment">
+                        <code data-trim class="php">
+                            $firstName = "John"
+                            $lastName = "Doe"
+                        </code>
+                        </pre>
+                        <aside class="notes">
+                            <p>The same goes for methods, functions, constants.</p>
+                            <p>Michael Feathers, author of Working Effectively with Legacy Code: Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better</p>
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Prevent writing comments</h2>
+                        <ul>
+                            <li>Comments have to be maintained as well</li>
+                            <li>Comments are lies waiting to happen</li>
+                            <li>Programmers can read code</li>
+                            <li>Code should be self-explanatory</li>
+                            <li>Writing a comment should feel like a failure to express yourself in code</li>
+                            <li>Unless it explains <strong>WHY</strong> the code does what it does</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>SOLID design principles</h2>
+                        <ul>
+                            <li>Single Responsibility Principle.</li>
+                            <li>Open/Closed Principle.</li>
+                            <li>Liskov Substitution Principle.</li>
+                            <li>Interface Segregation Principle.</li>
+                            <li>Dependency Inversion Principle.</li>
+                        </ul>
                         <aside class="notes">
                             <ul>
-                                <li>Any effort, no matter how small, improves your code</li>
+                                <li>Coined by Robert C. Martin</li>
+                                <li>These are a talk on their own</li>
+                                <li>Research these principles</li>
+                                <li>Most influential: Single Responsibility Principle</li>
                             </ul>
                         </aside>
                     </section>
@@ -274,9 +315,55 @@
                             </ul>
                         </aside>
                     </section>
-                    <aside class="notes">
-                        Inspiration: https://www.youtube.com/watch?v=UjhX2sVf0eg
-                    </aside>
+                    <section>
+                        <h2>The boyscout rule</h2>
+                        <blockquote>
+                            "Try and leave this world a little better than you found it."
+                            <caption>
+                                Robert Stephenson Smyth Baden-Powell - <em>the father of scouting</em>
+                            </caption>
+                        </blockquote>
+                        <aside class="notes">
+                            <ul>
+                                <li>Any effort, no matter how small, improves your code</li>
+                            </ul>
+                        </aside>
+                    </section>
+                </section>
+                <section>
+                    <h1>Automated testing</h1>
+                    <section>
+                        <h2>Acceptance tests</h2>
+                        <ul>
+                            <li>Are your acceptance criteria</li>
+                            <li>Written in collaboration with the client</li>
+                            <li>Your feature is complete when all these pass</li>
+                            <li>Often tested through the UI</li>
+                            <li>See <em>BrowserTestBase</em> in Drupal</li>
+                        </ul>
+                        <aside class="notes">
+                            BDD
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Integration tests</h2>
+                        <ul>
+                            <li>Tests how key components of your system work together</li>
+                            <li>Do not touch the UI</li>
+                            <li>May need the database</li>
+                            <li>See <em>KernelTestBase</em> in Drupal</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Unit tests</h2>
+                        <ul>
+                            <li>Test individual units of code</li>
+                            <li>Should be blazingly fast</li>
+                            <li>Do not touch the UI</li>
+                            <li>Do not touch the database</li>
+                            <li>See <em>UnitTestBase</em> in Drupal</li>
+                        </ul>
+                    </section>
                 </section>
                 <section>
                     <h1>Estimation</h1>
@@ -285,14 +372,6 @@
                         <li>Managers/clients see it as a promise</li>
                         <li>Expectaction management</li>
                         <li>Ideally consists of 3 numbers, min, best guess, max</li>
-                        <li>...</li>
-                    </ul>
-                </section>
-                <section>
-                    <h1>Coding practices</h1>
-                    <ul>
-                        <li>Clean code</li>
-                        <li>Code review</li>
                         <li>...</li>
                     </ul>
                 </section>
@@ -308,6 +387,10 @@
                 </section>
 			</div>
 		</div>
+    <aside>
+        Inspiration: https://www.youtube.com/watch?v=UjhX2sVf0eg<br>
+        How clean code should read: https://theholyjava.wordpress.com/2012/12/15/what-is-clean-code-quotes/<br>
+    </aside>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
