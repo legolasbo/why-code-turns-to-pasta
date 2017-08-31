@@ -217,14 +217,10 @@
                     <h1>Keeping code clean</h1>
                     <section>
                         <h2>What do we consider clean code?</h2>
-                        <ul class="fragment">
-                            <li>Adheres to coding standards</li>
-                            <li>Short methods/functions (.i.e. <=25 lines)</li>
-                            <li>Method names describe their intent</li>
-                            <li>No magic numbers or strings</li>
-                            <li>Few nested loops/conditionals</li>
-                            <li>Comments only describe WHY code does something, not how it does it.</li>
-                        </ul>
+                        <blockquote class="fragment">
+                            Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better
+                            <cite>Michael Feathers - <em>Author of Working Effectively with Legacy Code</em></cite>
+                        </blockquote>
                         <aside class="notes">
                             Clean code is <b>EASY TO READ</b>:<br>
                             <ul>
@@ -270,7 +266,72 @@
                         </pre>
                         <aside class="notes">
                             <p>The same goes for methods, functions, constants.</p>
-                            <p>Michael Feathers, author of Working Effectively with Legacy Code: Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better</p>
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Use consistent return types</h2>
+                        <pre class="">
+                        <code data-trim class="php">
+                            /**
+                            * @return array|bool
+                            *   The things to load or false if they could not be found.
+                            **/
+                            function loadThings() {
+                                ...
+                            }
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>Don't return NULL</h2>
+                        <div class="display-columns-2">
+                            <div class="example">
+                                <pre class="">
+                                <code data-trim class="php">
+                                    $pages = load_pages($some, $arguments);
+                                    if ($pages !== NULL) {
+                                        foreach($pages as $page) {
+                                            // Do something.
+                                        }
+                                    }
+                                </code>
+                                </pre>
+                                    <pre class="">
+                                <code data-trim class="php">
+                                    foreach(load_pages($some, $arguments) as $page) {
+                                        // Do something.
+                                    }
+                                </code>
+                                </pre>
+                            </div>
+                            <div class="example">
+                                <pre class="">
+                                <code data-trim class="php">
+                                    $logger = $container->getLogger();
+                                    if ($logger !== NULL) {
+                                        $logger->log("Some message", 'success');
+                                    }
+                                    ...
+                                    if ($logger !== NULL) {
+                                        $logger->log("Some warning down the line", 'warning');
+                                    }
+                                </code>
+                                </pre>
+                                <pre class="">
+                                <code data-trim class="php">
+                                    $logger = $container->getLogger();
+                                    $logger->log("Some message", 'success');
+                                    ...
+                                    $logger->log("Some warning down the line", 'warning');
+                                </code>
+                                </pre>
+                            </div>
+                        </div>
+                        <aside class="notes">
+                            <ul>
+                                <li>You're forcing the user of your code to check for null directly after calling the method/function.</li>
+                                <li>Either throw an exception or return an empty object.</li>
+                            </ul>
                         </aside>
                     </section>
                     <section>
