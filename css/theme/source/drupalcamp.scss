@@ -62,3 +62,12 @@ section {
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
+
+.reveal pre,
+.reveal blockquote {
+	box-shadow: none;
+}
+
+.reveal cite {
+	font-size: .8em;
+}

@@ -63,6 +63,11 @@
                             <li>Readable</li>
                         </ul>
                         <aside class="notes">
+                            <ul>
+                                <li>Who starts project with the best intentions? <em>We'll do it right this time. We'll go fast!</em></li>
+                                <li>Who has been slowed down by bad code?</li>
+                                <li>Who has been slowed down by their own bad code?</li>
+                            </ul>
                             Ask definition of good code.
                         </aside>
                     </section>
@@ -218,10 +223,12 @@
                     <h1>Keeping code clean</h1>
                     <section>
                         <h2>What do we consider clean code?</h2>
-                        <blockquote class="fragment">
-                            Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better
+                        <div class="fragment">
+                            <blockquote>
+                                Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better
+                            </blockquote>
                             <cite>Michael Feathers - <em>Author of Working Effectively with Legacy Code</em></cite>
-                        </blockquote>
+                        </div>
                         <aside class="notes">
                             Clean code is <b>EASY TO READ</b>:<br>
                             <ul>
@@ -236,10 +243,9 @@
                         <div class="fragment">
                             <blockquote>
                                 “Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. ...[Therefore,] making it easy to read makes it easier to write.”
-                                <caption>Robert C. Martin, Clean Code: A Handbook of Agile Software Craftsmanship</caption>
                             </blockquote>
+                            <cite>Robert C. Martin, Clean Code: A Handbook of Agile Software Craftsmanship</cite>
                         </div>
-                        <div class="fragment"><!-- todo! -->THIS SHOULD HAVE A GRAPH</div>
                         <aside class="notes">
                             Ask how much time we spend reading code, compared to writing code.
                             <ul>
@@ -253,7 +259,7 @@
                     </section>
                     <section>
                         <h2>Use meaningful names</h2>
-                        <pre class="fragment">
+                        <pre>
                         <code data-trim class="php">
                             $fn = "John" // First name
                             $ln = "Doe" // Last name
@@ -381,10 +387,10 @@
                         <h2>The boyscout rule</h2>
                         <blockquote>
                             "Try and leave this world a little better than you found it."
-                            <caption>
-                                Robert Stephenson Smyth Baden-Powell - <em>the father of scouting</em>
-                            </caption>
                         </blockquote>
+                        <cite>
+                            Robert Stephenson Smyth Baden-Powell - <em>the father of scouting</em>
+                        </cite>
                         <aside class="notes">
                             <ul>
                                 <li>Any effort, no matter how small, improves your code</li>
@@ -395,16 +401,26 @@
                 <section>
                     <h1>Automated testing</h1>
                     <section>
+                        <ul>
+                            <li>Manual testing takes a lot of time</li>
+                            <li>Catches regressions faster than any human can</li>
+                            <li>Test driven development improves your design</li>
+                        </ul>
+                    </section>
+                    <section>
                         <h2>Acceptance tests</h2>
                         <ul>
                             <li>Are your acceptance criteria</li>
                             <li>Written in collaboration with the client</li>
-                            <li>Your feature is complete when all these pass</li>
+                            <li>Keep you focused on the MVP</li>
                             <li>Often tested through the UI</li>
                             <li>See <em>BrowserTestBase</em> in Drupal</li>
                         </ul>
                         <aside class="notes">
-                            BDD
+                            <ul>
+                                <li>Focus on MVP: Only implement what the tests specify</li>
+                                <li>Avoid depending on the UI whenever possible, because user interfaces change</li>
+                            </ul>
                         </aside>
                     </section>
                     <section>
@@ -428,24 +444,71 @@
                     </section>
                 </section>
                 <section>
-                    <h1>Estimation</h1>
-                    <ul>
-                        <li>It's just that, an estimate</li>
-                        <li>Managers/clients see it as a promise</li>
-                        <li>Expectaction management</li>
-                        <li>Ideally consists of 3 numbers, min, best guess, max</li>
-                        <li>...</li>
-                    </ul>
-                </section>
-                <section>
-                    <h1>Saying no</h1>
-                    <aside class="notes">
-                        <ul>
-                            <li>Who starts project with the best intentions? <em>We'll do it right this time. We'll go fast!</em></li>
-                            <li>Who has been slowed down by bad code?</li>
-                            <li>Who has been slowed down by their own bad code?</li>
+                    <h1>Time management</h1>
+                    <section>
+                        <h2>Estimates</h2>
+                        <ul class="fragment">
+                            <li>It's just that, an estimate</li>
+                            <li>Ideally consists of 3 numbers, min, best guess, max</li>
+                            <li>Should be used to determine feature priorities</li>
+                            <li>Managers/clients see it as a promise</li>
+                            <li>...</li>
                         </ul>
-                    </aside>
+                        <aside class="notes">
+                            <ul>
+                                <li><strong>Working on project A:</strong> Alice comes by because a new feature is needed for project B</li>
+                                <li><strong>You're asked on the spot:</strong> when can it be done?</li>
+                                <li><strong>You think:</strong> I think I can do that in about 4 days</li>
+                                <li><strong>You say:</strong> 3 weeks, because you've got more things to do</li>
+                                <li><strong>Week 1:</strong> finishing what you were working on</li>
+                                <li><strong>Week 2:</strong> You start on monday, but after lunch a critical system hangs.</li>
+                                <li>Takes up whole week.</li>
+                                <li><strong>Week 3:</strong> You actually get to work on it, this is harder than expected.</li>
+                                <li><strong>Tuesday:</strong> Shit, I'm not going to make this.</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>We're not going to make the estimate!</h2>
+                        <div class="display-columns-3">
+                            <div>
+                                <strong>Option A:</strong>
+                                <ul>
+                                    <li>Rush to try and get things done;</li>
+                                    <li>When she asks, tell Alice everything will be ok.</li>
+                                    <li>Deliver poorly tested work or nothing at all.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>Option B:</strong>
+                                <ul>
+                                    <li>Rush to try and get things done</li>
+                                    <li>When she asks, tell Alice you're not going to make it.</li>
+                                    <li>She tells you to try, you agree. She thinks you'll deliver, you know you won't</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>Option C:</strong>
+                                <ul>
+                                    <li>Drop everything and inform Alice straight away</li>
+                                    <li>Explain the options, tell her what's difficult and what's easy</li>
+                                    <li>Let her prioritize</li>
+                                    <li>Implement what's most important</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Slow and steady wins the race</h2>
+                        <ul>
+                            <li>Don't allow yourself to be rushed</li>
+                            <li>Stick to whatever practice you believe delivers outstanding work</li>
+                            <li>...</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Saying no</h2>
+                    </section>
                 </section>
 			</div>
 		</div>
