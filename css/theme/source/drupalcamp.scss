@@ -71,3 +71,7 @@ section {
 .reveal cite {
 	font-size: .8em;
 }
+
+.hljs-addition, .hljs-comment, .hljs-quote, .hljs-meta {
+	color: orange !important;
+}

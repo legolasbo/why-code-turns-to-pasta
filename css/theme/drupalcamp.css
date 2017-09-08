@@ -95,10 +95,10 @@ body {
   max-height: none; }
 
 .reveal .display-columns-2 {
-  column-count: columns 2; }
+  column-count: 2; }
 
 .reveal .display-columns-3 {
-  column-count: columns 3; }
+  column-count: 3; }
 
 .reveal .display-flex {
   display: flex; }
@@ -335,3 +335,6 @@ body {
 
 .reveal cite {
   font-size: .8em; }
+
+.hljs-addition, .hljs-comment, .hljs-quote, .hljs-meta {
+  color: orange !important; }

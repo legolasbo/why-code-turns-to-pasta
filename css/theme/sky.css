@@ -93,10 +93,10 @@ body {
   max-height: none; }
 
 .reveal .display-columns-2 {
-  column-count: columns 2; }
+  column-count: 2; }
 
 .reveal .display-columns-3 {
-  column-count: columns 3; }
+  column-count: 3; }
 
 .reveal .display-flex {
   display: flex; }

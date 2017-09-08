@@ -72,8 +72,7 @@
                         </aside>
                     </section>
                     <section>
-                        Is maintainable.
-                        
+                        <h2>Is maintainable and a pleasure to work with.</h2>
                         <aside class="notes">
                             We know this to be true, but why do we fail to write it?
                         </aside>
@@ -82,9 +81,11 @@
                 <section>
                     <h1>How code turns to pasta.</h1>
                     <section>
+                        <h2>Let's find out</h2>
                         <aside class="notes">
                             <ul>
                                 <li>Simple shopping cart checkout</li>
+                                <li>Client: "We need it to list all purchased items, their prices and the grand total"</li>
                             </ul>
                         </aside>
                     </section>
@@ -101,7 +102,9 @@
                         </pre>
                         <aside class="notes">
                             <ul>
-                                <li>Client: "We need it to list all purchased items, their prices and the grand total"</li>
+                                <li>Sure thing, here you go.</li>
+                                <li>Client: Oh! but we also need it to list the shipping costs now.</li>
+                                <li>Client: And there should be a grand total with shipping included.</li>
                             </ul>
                         </aside>
                     </section>
@@ -119,7 +122,8 @@
                     </section>
                     <aside class="notes">
                         <ul>
-                            <li>Client: "Oh, we also need it to show the shipping costs and include those in the grand total"</li>
+                            <li>Sure thing, we'll add that.</li>
+                            <li>Client: "Penny from marketing wants to give a 10% discount to new customers"</li>
                         </ul>
                     </aside>
                     <section>
@@ -127,20 +131,21 @@
                         <code data-trim class="php">
                             ...
                             print "Subtotal: $total";
-                            
+
                             if ($account->isNewCustomer() == TRUE) {
                                 $discount = $total * 0.10;
-                                print "10% new customer discount: -$discount";
+                                print "10% new customer discount: -{$discount}";
                                 $total = $total - $discount;
                             }
-                            
+
                             ...
                             print "Total:    $total;
                         </code>
                         </pre>
                         <aside class="notes">
                             <ul>
-                                <li>Client: "Penny from marketing wants to give a 10% discount to new customers"</li>
+                                <li>Yup, got it.</li>
+                                <li>Client: "Penny also wants to run various promotions"</li>
                             </ul>
                         </aside>
                     </section>
@@ -148,7 +153,7 @@
                         <pre>
                         <code data-trim class="php">
                             ...
-                            
+
                             if (...) {
                                 ...
                             }
@@ -160,11 +165,13 @@
                         </pre>
                         <aside class="notes">
                             <ul>
-                                <li>Client: "Penny also wants to run various promotions"</li>
+                                <li>This could go on forever.</li>
+                                <li>Next slide: This is getting out of hand.</li>
                             </ul>
                         </aside>
                     </section>
                     <section>
+                        <h2>This is getting out of hand.</h2>
                         <pre class="">
                         <code data-trim class="php auto-height">
                             $total = 0;
@@ -176,7 +183,7 @@
                             
                             if ($account->isNewCustomer() == TRUE) {
                                 $discount = $total * 0.10;
-                                print "10% new customer discount: -$discount";
+                                print "10% new customer discount: -${discount}";
                                 $total = $total - $discount;
                             }
                             if (...) {
@@ -192,8 +199,11 @@
                         </code>
                         </pre>
                         <aside class="notes">
+                            <h2>This is getting out of hand.</h2>
                             Whenever change is needed, you must read and understand it all.
                             Keeping with this approach will only make the code rot more.
+                            <br>
+                            Let's refactor.
                         </aside>
                     </section>
                     <section>
@@ -201,10 +211,11 @@
                         <code data-trim class="php">
                             /** @var DiscountCollection **/
                             $discounts = getDiscountsFor($items, $account);
-                            $total = $subtotal - $discounts->totalDiscount + $shippingCosts;
-                            
+                            $subTotal = calculateSubTotal($items);
+                            $total = $subTotal - $discounts->getTotalDiscount() + $shippingCosts;
+
                             printItems($items);
-                            printSubtotal(calculateSubtotal($items));
+                            printSubtotal($subTotal);
                             printDiscounts($discounts);
                             printShipping($shippingCosts);
                             printTotal($total);
@@ -216,6 +227,7 @@
                                 <li>If the shipping costs end up being dynamic, we can easily introduce a calculateShipping method.</li>
                                 <li>Changing the order in which things are printed is a matter of reordering the print... lines.</li>
                             </ul>
+                            This brings us to clean code. Next slide
                         </aside>
                     </section>
                 </section>
@@ -271,8 +283,23 @@
                             $lastName = "Doe"
                         </code>
                         </pre>
+                        <pre class="fragment">
+                        <code data-trim class="php">
+                            $c = db_conn('admin', 'admin', 'localhost', 1234);
+                        </code>
+                        </pre>
+                        <pre class="fragment">
+                        <code data-trim class="php">
+                            $connection = connect_to_database($user, $password, $host, $port);
+                        </code>
+                        </pre>
                         <aside class="notes">
-                            <p>The same goes for methods, functions, constants.</p>
+                            <ul>
+                                <li>Keeping track of cryptic names takes up precious mental capacity</li>
+                                <li>All names should be meaningful and self explanatory</li>
+                                <li>Methods, functions, variables, constants, doesn't matter</li>
+                                <li>Prevent magic numbers/strings</li>
+                            </ul>
                         </aside>
                     </section>
                     <section>
@@ -292,12 +319,12 @@
                     <section>
                         <h2>Don't return NULL</h2>
                         <div class="display-columns-2">
-                            <div class="example">
+                            <div class="example fragment">
                                 <pre class="">
                                 <code data-trim class="php">
                                     $pages = load_pages($some, $arguments);
                                     if ($pages !== NULL) {
-                                        foreach($pages as $page) {
+                                        foreach ($pages as $page) {
                                             // Do something.
                                         }
                                     }
@@ -305,13 +332,13 @@
                                 </pre>
                                     <pre class="">
                                 <code data-trim class="php">
-                                    foreach(load_pages($some, $arguments) as $page) {
+                                    foreach (load_pages($some, $arguments) as $page) {
                                         // Do something.
                                     }
                                 </code>
                                 </pre>
                             </div>
-                            <div class="example">
+                            <div class="example fragment">
                                 <pre class="">
                                 <code data-trim class="php">
                                     $logger = $container->getLogger();
@@ -366,7 +393,7 @@
                                 <li>Coined by Robert C. Martin</li>
                                 <li>These are a talk on their own</li>
                                 <li>Research these principles</li>
-                                <li>Most influential: Single Responsibility Principle</li>
+                                <li>Most influential on quality: Single Responsibility Principle</li>
                             </ul>
                         </aside>
                     </section>
@@ -405,6 +432,7 @@
                             <li>Manual testing takes a lot of time</li>
                             <li>Catches regressions faster than any human can</li>
                             <li>Test driven development improves your design</li>
+                            <li>Finds issues before code is deployed, so your client doesn't have to.</li>
                         </ul>
                     </section>
                     <section>
@@ -452,7 +480,6 @@
                             <li>Ideally consists of 3 numbers, min, best guess, max</li>
                             <li>Should be used to determine feature priorities</li>
                             <li>Managers/clients see it as a promise</li>
-                            <li>...</li>
                         </ul>
                         <aside class="notes">
                             <ul>
@@ -471,29 +498,32 @@
                     <section>
                         <h2>We're not going to make the estimate!</h2>
                         <div class="display-columns-3">
-                            <div>
+                            <div class="fragment">
                                 <strong>Option A:</strong>
                                 <ul>
                                     <li>Rush to try and get things done;</li>
                                     <li>When she asks, tell Alice everything will be ok.</li>
                                     <li>Deliver poorly tested work or nothing at all.</li>
+                                    <li>Faith in your ability is lost.</li>
                                 </ul>
                             </div>
-                            <div>
+                            <div class="fragment">
                                 <strong>Option B:</strong>
                                 <ul>
                                     <li>Rush to try and get things done</li>
                                     <li>When she asks, tell Alice you're not going to make it.</li>
                                     <li>She tells you to try, you agree. She thinks you'll deliver, you know you won't</li>
+                                    <li>Faith in your ability is lost.</li>
                                 </ul>
                             </div>
-                            <div>
+                            <div class="fragment">
                                 <strong>Option C:</strong>
                                 <ul>
                                     <li>Drop everything and inform Alice straight away</li>
                                     <li>Explain the options, tell her what's difficult and what's easy</li>
                                     <li>Let her prioritize</li>
                                     <li>Implement what's most important</li>
+                                    <li>Alice might not get everything, but what she gets is high quality</li>
                                 </ul>
                             </div>
                         </div>
@@ -501,15 +531,46 @@
                     <section>
                         <h2>Slow and steady wins the race</h2>
                         <ul>
-                            <li>Don't allow yourself to be rushed</li>
+                            <li>Don't allow yourself to be rushed, rushing is the cause of many mistakes.</li>
                             <li>Stick to whatever practice you believe delivers outstanding work</li>
-                            <li>...</li>
+                            <li>Don't allow yourself to be rushed</li>
                         </ul>
+                        <aside class="notes">
+                            <ul>
+                                <li>What you believe makes you go fast in normally, is what you should do in high stress situations</li>
+                                <li>TDD, Pair programming, code reviews, I don't care.</li>
+                                <li>Who would you rather have operate on your heart?</li>
+                            </ul>
+                        </aside>
                     </section>
                     <section>
                         <h2>Saying no</h2>
+                        <ul>
+                            <li>Your manager is not out to make your life miserable</li>
+                            <li>Its <strong>their</strong> job to worry about deadlines</li>
+                            <li>Its <strong>their</strong> job to mitigate risk</li>
+                            <li>Its <strong>your</strong> job to answer their questions truthfully</li>
+                            <li>Being able to say no is just as important as being able to say yes.</li>
+                            <li>Only make commitments you can keep.</li>
+                        </ul>
+
+                        <aside class="notes">
+                            <ul>
+                                <li>Agreeing to try is a commitment.</li>
+                                <li>Suggest options/alternatives instead.</li>
+                            </ul>
+                        </aside>
                     </section>
                 </section>
+          <section>
+              <h1>In closing</h1>
+              <section>
+                  <h2>Be and act like a professional</h2>
+                  <aside class="notes">
+
+                  </aside>
+              </section>
+          </section>
 			</div>
 		</div>
     <aside>
