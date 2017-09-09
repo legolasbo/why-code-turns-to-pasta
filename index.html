@@ -28,25 +28,37 @@
             <h1>Why your project turns to pasta</h1>
             <h2>and what to do about it</h2>
         </section>
-				<section>
+				<section class="about-me">
                     <H1>About me</H1>
-                    <ul>
-                        <li>31 years old</li>
-                        <li>Father of two</li>
-                        <li>Programming since the age of 8</li>
-                        <li>Current job: Developer at Deeson</li>
-                        <li>Job starting next month: Competence Lead Drupal at Ordina</li>
-                        <li>~7 years experience with Drupal 6, 7 and 8</li>
-                    </ul>
+                    <div class="columns">
+                        <div class="profile">
+                            <img src="/chris.jpg">
+                            <div></div>
+                        </div>
+                        <ul>
+                            <li>31 years old</li>
+                            <li>Father of two</li>
+                            <li>Programming since ~1995</li>
+                            <li>Current job: Developer at Deeson</li>
+                            <li>Job starting next month: Competence Lead Drupal at Ordina</li>
+                            <li>~7 years experience with Drupal 6, 7 and 8</li>
+                        </ul>
+                    </div>
+                    <div class="contact">
+                        <div class="contact-set inline"><img class="logo" src="/twitter.png">@legolasbo</div>
+                        <div class="contact-set inline"><img class="logo" src="/druplicon.png">https://drupal.org/u/legolasbo</div>
+                    </div>
                 </section>
                 <section>
                     <h1>Warming up</h1>
                     <aside class="notes">
                         <ul>
-                            <li>Could everyone who identifies themselves a developer stand up? <em>Frontend, backend, doesn't matter</em></li>
+                            <li>Could everyone who has an active role in software development stand up.</li>
+                            <li>Developer, designer, project manager, UX designer</li>
                             <li>Could everyone who identifies as male sit down.</li>
                             <li>What's wrong with this picture?</li>
-                            <li>What are we as a technical community doing to scare all these bright, talented, woman away?</li>
+                            <li>Some of the best I know are women</li>
+                            <li>What are we as a community doing to scare all these bright, talented, woman away?</li>
                         </ul>
                     </aside>
                 </section>
@@ -74,7 +86,8 @@
                     <section>
                         <h2>Is maintainable and a pleasure to work with.</h2>
                         <aside class="notes">
-                            We know this to be true, but why do we fail to write it?
+                            We know this to be true, but why do we fail to write it?<br>
+                            Next slide: let's find out!
                         </aside>
                     </section>
                 </section>
@@ -227,7 +240,7 @@
                                 <li>If the shipping costs end up being dynamic, we can easily introduce a calculateShipping method.</li>
                                 <li>Changing the order in which things are printed is a matter of reordering the print... lines.</li>
                             </ul>
-                            This brings us to clean code. Next slide
+                            Next slide: This brings us to clean code.
                         </aside>
                     </section>
                 </section>
@@ -237,15 +250,29 @@
                         <h2>What do we consider clean code?</h2>
                         <div class="fragment">
                             <blockquote>
-                                Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better
+                                Clean code always looks like it was written by <strong>someone who cares</strong>. There is <strong>nothing obvious that you can do to make it better</strong>.
                             </blockquote>
                             <cite>Michael Feathers - <em>Author of Working Effectively with Legacy Code</em></cite>
                         </div>
+                        <div class="fragment">
+                            <blockquote>
+                                I like my code to be elegant and efficient. The logic should be <strong>straightforward</strong> and make it hard for bugs to hide, <em>...</em> Clean code does <strong>one thing well</strong>.
+                            </blockquote>
+                            <cite>Bjarne Stroustrup - <em>Inventor of C++</em></cite>
+                        </div>
+                        <div class="fragment">
+                            <blockquote>
+                                You know you are working with clean code when <strong>each routine you read turns out to be pretty much what you expected</strong>.
+                            </blockquote>
+                            <cite>Ward Cunningham - <em>inventor of Wiki and Fit, co-inventor of Extreme Programming</em></cite>
+                        </div>
                         <aside class="notes">
+                            Standing on the shoulders of giants!<br>
                             Clean code is <b>EASY TO READ</b>:<br>
                             <ul>
+                                <li>Is obviously written by someone who cares</li>
                                 <li>Reads like well written prose</li>
-                                <li>Requires no scrolling</li>
+                                <li>Does one thing and does it well</li>
                                 <li>Conveys intent</li>
                             </ul>
                         </aside>
@@ -288,7 +315,7 @@
                             $c = db_conn('admin', 'admin', 'localhost', 1234);
                         </code>
                         </pre>
-                        <pre class="fragment">
+                                <pre class="fragment">
                         <code data-trim class="php">
                             $connection = connect_to_database($user, $password, $host, $port);
                         </code>
@@ -319,9 +346,10 @@
                     <section>
                         <h2>Don't return NULL</h2>
                         <div class="display-columns-2">
-                            <div class="example fragment">
+                            <div class="column">
                                 <pre class="">
                                 <code data-trim class="php">
+                                    // load_pages() returns NULL if no pages found.
                                     $pages = load_pages($some, $arguments);
                                     if ($pages !== NULL) {
                                         foreach ($pages as $page) {
@@ -330,29 +358,35 @@
                                     }
                                 </code>
                                 </pre>
-                                    <pre class="">
+                                <pre class="fragment">
                                 <code data-trim class="php">
+                                    // load_pages() returns empty array if no pages found.
                                     foreach (load_pages($some, $arguments) as $page) {
                                         // Do something.
                                     }
                                 </code>
                                 </pre>
                             </div>
-                            <div class="example fragment">
-                                <pre class="">
+                            <div class="column">
+                                <pre class="fragment">
                                 <code data-trim class="php">
+                                    // getLogger() returns NULL if no logger configured.
                                     $logger = $container->getLogger();
                                     if ($logger !== NULL) {
+                                        /** @var LoggerInterface $logger **/
                                         $logger->log("Some message", 'success');
                                     }
                                     ...
                                     if ($logger !== NULL) {
+                                        /** @var LoggerInterface $logger **/
                                         $logger->log("Some warning down the line", 'warning');
                                     }
                                 </code>
                                 </pre>
-                                <pre class="">
+                                <pre class="fragment">
                                 <code data-trim class="php">
+                                    // getLogger() returns NullLogger instance if no logger configured.
+                                    /** @var LoggerInterface $logger **/
                                     $logger = $container->getLogger();
                                     $logger->log("Some message", 'success');
                                     ...
@@ -371,22 +405,22 @@
                     <section>
                         <h2>Prevent writing comments</h2>
                         <ul>
+                            <li>Unless it explains <strong>WHY</strong> the code does what it does</li>
                             <li>Comments have to be maintained as well</li>
                             <li>Comments are lies waiting to happen</li>
                             <li>Programmers can read code</li>
                             <li>Code should be self-explanatory</li>
                             <li>Writing a comment should feel like a failure to express yourself in code</li>
-                            <li>Unless it explains <strong>WHY</strong> the code does what it does</li>
                         </ul>
                     </section>
                     <section>
                         <h2>SOLID design principles</h2>
                         <ul>
-                            <li>Single Responsibility Principle.</li>
-                            <li>Open/Closed Principle.</li>
-                            <li>Liskov Substitution Principle.</li>
-                            <li>Interface Segregation Principle.</li>
-                            <li>Dependency Inversion Principle.</li>
+                            <li><strong>S</strong>ingle Responsibility Principle.</li>
+                            <li><strong>O</strong>pen/Closed Principle.</li>
+                            <li><strong>L</strong>iskov Substitution Principle.</li>
+                            <li><strong>I</strong>nterface Segregation Principle.</li>
+                            <li><strong>D</strong>ependency Inversion Principle.</li>
                         </ul>
                         <aside class="notes">
                             <ul>
@@ -406,7 +440,7 @@
                         </ul>
                         <aside class="notes">
                             <ul>
-                                <li></li>
+                                <li>The goal is to learn from each other</li>
                             </ul>
                         </aside>
                     </section>
@@ -434,6 +468,11 @@
                             <li>Test driven development improves your design</li>
                             <li>Finds issues before code is deployed, so your client doesn't have to.</li>
                         </ul>
+                        <aside class="notes">
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </aside>
                     </section>
                     <section>
                         <h2>Acceptance tests</h2>
@@ -475,7 +514,7 @@
                     <h1>Time management</h1>
                     <section>
                         <h2>Estimates</h2>
-                        <ul class="fragment">
+                        <ul class="">
                             <li>It's just that, an estimate</li>
                             <li>Ideally consists of 3 numbers, min, best guess, max</li>
                             <li>Should be used to determine feature priorities</li>
@@ -496,7 +535,7 @@
                         </aside>
                     </section>
                     <section>
-                        <h2>We're not going to make the estimate!</h2>
+                        <h2>We're not going to make it!</h2>
                         <div class="display-columns-3">
                             <div class="fragment">
                                 <strong>Option A:</strong>
@@ -546,10 +585,10 @@
                     <section>
                         <h2>Saying no</h2>
                         <ul>
-                            <li>Your manager is not out to make your life miserable</li>
+                            <li>Managers are not out to make your life miserable</li>
                             <li>Its <strong>their</strong> job to worry about deadlines</li>
                             <li>Its <strong>their</strong> job to mitigate risk</li>
-                            <li>Its <strong>your</strong> job to answer their questions truthfully</li>
+                            <li>They need honest answers to do their job - even if that answer is no</li>
                             <li>Being able to say no is just as important as being able to say yes.</li>
                             <li>Only make commitments you can keep.</li>
                         </ul>
@@ -565,10 +604,30 @@
           <section>
               <h1>In closing</h1>
               <section>
-                  <h2>Be and act like a professional</h2>
+                  <h2>Be (and act like) a professional</h2>
+                  <ul>
+                      <li>Take responsibility for your code</li>
+                      <li>Fulfill your commitments</li>
+                      <li>Don't take shortcuts</li>
+                      <li>Help each other grow</li>
+                      <li>Be honest</li>
+                      <li>Communicate</li>
+                  </ul>
                   <aside class="notes">
-
+                      <ul>
+                          <li></li>
+                      </ul>
                   </aside>
+              </section>
+          </section>
+          <section>
+              <h1>Thank you!</h1>
+              <section>
+                  <div class="contact">
+                      <div class="contact-set left-align"><img class="logo" src="/twitter.png">@legolasbo</div>
+                      <div class="contact-set left-align"><img class="logo" src="/druplicon.png">https://drupal.org/u/legolasbo</div>
+                      <div class="contact-set left-align"><img class="logo" src="/joind.in.png">https://joind.in/talk/b14f1</div>
+                  </div>
               </section>
           </section>
 			</div>

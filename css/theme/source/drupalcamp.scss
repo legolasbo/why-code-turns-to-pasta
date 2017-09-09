@@ -63,13 +63,50 @@ section {
 @import "../template/theme";
 // ---------------------------------------------
 
-.reveal pre,
-.reveal blockquote {
-	box-shadow: none;
-}
+.reveal {
+	pre,
+	blockquote {
+		box-shadow: none;
+	}
 
-.reveal cite {
-	font-size: .8em;
+	cite {
+		font-size: .8em;
+	}
+
+	section.about-me {
+		.columns > * {
+			float:left;
+			margin-right: 1em;
+		}
+
+		img {
+			border: none;
+			box-shadow: none;
+		}
+		> img {
+			float: right;
+		}
+
+		.logo {
+			height: 1em;
+			width: auto;
+			margin: 0 0.4em 0 0;
+		}
+	}
+
+	.contact {
+		width: 100%;
+		float: left;
+		margin-top: 1em;
+		.contact-set {
+			margin-right: 1em;
+		}
+	}
+
+
+	.inline {
+		display:inline;
+	}
 }
 
 .hljs-addition, .hljs-comment, .hljs-quote, .hljs-meta {
