@@ -98,7 +98,7 @@ body {
   float: left;
   width: 50%; }
 
-.reveal .display-columns-3 {
+.reveal .display-columns-3 > * {
   float: left;
   width: 33.3333%; }
 
@@ -336,7 +336,8 @@ body {
   box-shadow: none; }
 
 .reveal cite {
-  font-size: .8em; }
+  font-size: .8em;
+  margin-bottom: 1em; }
 
 .reveal section.about-me .columns > * {
   float: left;
@@ -349,7 +350,9 @@ body {
 .reveal section.about-me > img {
   float: right; }
 
-.reveal section.about-me .logo {
+.reveal .logo {
+  border: none;
+  box-shadow: none;
   height: 1em;
   width: auto;
   margin: 0 0.4em 0 0; }

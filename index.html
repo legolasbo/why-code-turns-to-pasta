@@ -212,7 +212,6 @@
                         </code>
                         </pre>
                         <aside class="notes">
-                            <h2>This is getting out of hand.</h2>
                             Whenever change is needed, you must read and understand it all.
                             Keeping with this approach will only make the code rot more.
                             <br>
@@ -220,6 +219,7 @@
                         </aside>
                     </section>
                     <section>
+                        <h2>Much better.</h2>
                         <pre>
                         <code data-trim class="php">
                             /** @var DiscountCollection **/
@@ -342,6 +342,9 @@
                             }
                         </code>
                         </pre>
+                        <aside class="notes">
+                            Inconsistent return types make you check EVERYTHING
+                        </aside>
                     </section>
                     <section>
                         <h2>Don't return NULL</h2>
@@ -440,6 +443,7 @@
                         </ul>
                         <aside class="notes">
                             <ul>
+                                <li>Only constructive criticism</li>
                                 <li>The goal is to learn from each other</li>
                             </ul>
                         </aside>
@@ -465,12 +469,15 @@
                         <ul>
                             <li>Manual testing takes a lot of time</li>
                             <li>Catches regressions faster than any human can</li>
-                            <li>Test driven development improves your design</li>
+                            <li>Test Driven Development (TDD) improves your design</li>
                             <li>Finds issues before code is deployed, so your client doesn't have to.</li>
                         </ul>
                         <aside class="notes">
                             <ul>
-                                <li></li>
+                                <li>Writing the test first guarantees testable code.</li>
+                                <li>You naturally want to keep units small and simple</li>
+                                <li>Discourages use of globals</li>
+                                <li>Encourages SOLID design</li>
                             </ul>
                         </aside>
                     </section>
@@ -566,12 +573,16 @@
                                 </ul>
                             </div>
                         </div>
+                        <aside class="notes">
+                            Let's explore our options.
+                        </aside>
                     </section>
                     <section>
                         <h2>Slow and steady wins the race</h2>
                         <ul>
-                            <li>Don't allow yourself to be rushed, rushing is the cause of many mistakes.</li>
                             <li>Stick to whatever practice you believe delivers outstanding work</li>
+                            <li>Don't allow yourself to be rushed</li>
+                            <li>Rushing is the cause of many mistakes.</li>
                             <li>Don't allow yourself to be rushed</li>
                         </ul>
                         <aside class="notes">
