@@ -17,9 +17,9 @@ section {
  * GLOBAL STYLES
  *********************************************/
 body {
-  background-image: url("/Drupalcamp_wide.001.no-sponsors.jpeg");
-  background-position: top center;
-  background-size: contain;
+  background-image: url("/ordina.png");
+  background-size: cover;
+  background-position: top left;
   background-repeat: no-repeat;
   background-color: #fff; }
 
